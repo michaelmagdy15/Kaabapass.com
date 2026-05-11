@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#193C31"/>
+  <!-- Green arc: 8-o'clock → 1-o'clock (left+top, large) -->
+  <path d="M11,44 A22,22 0 1,0 44,11" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Gold arc: 1-o'clock → 5-o'clock (right side) -->
+  <path d="M44,11 A22,22 0 0,1 44,53" stroke="#B08848" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Plane at top-right -->
+  <g transform="translate(46,9) rotate(42)">
+    <ellipse cx="0" cy="0" rx="1.2" ry="4" fill="#ffffff"/>
+    <path d="M-1.2,0 L-5.5,2.5 L-5.5,3.5 L-1.2,1.8Z" fill="#ffffff"/>
+    <path d="M1.2,0 L5.5,2.5 L5.5,3.5 L1.2,1.8Z" fill="#ffffff"/>
+    <path d="M-0.8,-2 L-2.5,-4.5 L-2.5,-3.2 L-0.8,-2Z" fill="#ffffff"/>
+    <path d="M0.8,-2 L2.5,-4.5 L2.5,-3.2 L0.8,-2Z" fill="#ffffff"/>
+  </g>
+  <!-- Kaaba body -->
+  <rect x="22" y="27" width="20" height="22" fill="#111111"/>
+  <!-- Kaaba top perspective -->
+  <polygon points="22,27 32,22 42,27" fill="#2A2A2A"/>
+  <!-- Kiswah gold band -->
+  <rect x="22" y="34" width="20" height="4" fill="#B08848"/>
+  <!-- Door -->
+  <rect x="28" y="39" width="8" height="10" rx="1.5" fill="#B08848" opacity="0.9"/>
+  <path d="M28,42 Q32,37 36,42" fill="#B08848" opacity="0.9"/>
+  <rect x="29.5" y="42" width="5" height="7" rx="1" fill="#7A5820"/>
+</svg>
