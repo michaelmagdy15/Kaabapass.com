@@ -6,10 +6,39 @@ import { FAQAccordion } from "@/components/shared/FAQAccordion";
 import { FAQS, TESTIMONIALS } from "@/lib/mock/seed";
 import { Star, Plane, Building2, FileCheck, Bus, Compass, Car, ArrowRight, Check } from "lucide-react";
 
+const BASE_URL = "https://app.kaabapass.com";
+
 export const metadata: Metadata = {
-  title: "KaabaPass — Book Your Complete Umrah Journey",
-  description: "Flights, hotels, visas, and guides — all in one seamless booking. Start your Umrah journey today.",
+  title: "Book Your Complete Umrah Journey from the USA",
+  description:
+    "Book your complete Umrah journey in minutes. Flights, hotels near Masjid al-Haram, Umrah visa assistance, ground transportation, and scholar-qualified guides — all in one seamless platform for US travelers.",
+  alternates: {
+    canonical: BASE_URL,
+  },
+  openGraph: {
+    title: "KaabaPass — Book Your Complete Umrah Journey from the USA",
+    description:
+      "One click. We handle everything — flights, hotels near Haram, Umrah visa, ground transport, and licensed guides. Your complete Umrah journey from the USA, simplified.",
+    url: BASE_URL,
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "KaabaPass — Complete Umrah Packages from the USA",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KaabaPass — Book Your Complete Umrah Journey from the USA",
+    description:
+      "One click. We handle everything — flights, hotels near Haram, Umrah visa, transport, and guides.",
+    images: ["/og-image.png"],
+  },
 };
+
 
 const WHY_ITEMS = [
   { icon: Plane, title: "All-in-one booking", body: "Flights, hotels, visa, transport, and guides — one booking, one platform." },
@@ -177,6 +206,50 @@ export default function HomePage() {
       </section>
 
       <WhatsAppFloater />
+
+      {/* FAQPage structured data for Google rich results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.slice(0, 6).map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+              },
+            })),
+          }),
+        }}
+      />
+
+      {/* BreadcrumbList structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://app.kaabapass.com",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Search Packages",
+                item: "https://app.kaabapass.com/search",
+              },
+            ],
+          }),
+        }}
+      />
     </>
   );
 }

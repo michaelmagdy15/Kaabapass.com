@@ -1,7 +1,14 @@
 {
-  "name": "KaabaPass",
+  "name": "KaabaPass — Complete Umrah Packages from the USA",
   "short_name": "KaabaPass",
-  "description": "One click. We handle everything.",
+  "description": "Book your complete Umrah journey in one click. Flights, hotels, visa, transport, and guides.",
+  "start_url": "/",
+  "scope": "/",
+  "id": "kaabapass-webapp",
+  "lang": "en-US",
+  "dir": "ltr",
+  "orientation": "portrait-primary",
+  "categories": ["travel", "lifestyle"],
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -18,10 +25,20 @@
     {
       "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "theme_color": "#193C31",
   "background_color": "#FAF7F0",
-  "display": "standalone"
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "label": "KaabaPass home screen"
+    }
+  ]
 }

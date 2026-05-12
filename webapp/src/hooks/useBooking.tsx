@@ -1,7 +1,10 @@
 "use client";
 
 import React, { createContext, useContext, useState, useCallback, type ReactNode } from "react";
-import type { BookingState, SearchParams, Package, PackageCustomizations, Traveler, PaymentMethod } from "@/types";
+import type {
+  BookingState, SearchParams, Package, PackageCustomizations,
+  Traveler, PaymentMethod, FlightOffer, HotelOffer,
+} from "@/types";
 import { PACKAGES } from "@/lib/mock/packages";
 import { generateBookingRef } from "@/lib/utils";
 
@@ -12,6 +15,8 @@ interface BookingContextValue {
   applyCustomizations: (customizations: PackageCustomizations) => void;
   setTravelers: (travelers: Traveler[]) => void;
   setPaymentMethod: (method: PaymentMethod) => void;
+  confirmFlight: (offer: FlightOffer, confirmedAt: string) => void;
+  confirmHotel: (offer: HotelOffer, confirmedAt: string) => void;
   confirmBooking: (email: string) => string;
   resetBooking: () => void;
 }
@@ -39,7 +44,14 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const selectPackage = useCallback((pkg: Package) => {
-    setBooking((prev) => ({ ...prev, selectedPackage: pkg, customizations: undefined }));
+    setBooking((prev) => ({
+      ...prev,
+      selectedPackage: pkg,
+      customizations: undefined,
+      // Clear confirmed offers when package changes — prices may differ
+      confirmedFlight: undefined,
+      confirmedHotel: undefined,
+    }));
   }, []);
 
   const applyCustomizations = useCallback((customizations: PackageCustomizations) => {
@@ -54,6 +66,20 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     setBooking((prev) => ({ ...prev, paymentMethod: method }));
   }, []);
 
+  const confirmFlight = useCallback((offer: FlightOffer, confirmedAt: string) => {
+    setBooking((prev) => ({
+      ...prev,
+      confirmedFlight: { offer, confirmedAt },
+    }));
+  }, []);
+
+  const confirmHotel = useCallback((offer: HotelOffer, confirmedAt: string) => {
+    setBooking((prev) => ({
+      ...prev,
+      confirmedHotel: { offer, confirmedAt },
+    }));
+  }, []);
+
   const confirmBooking = useCallback((email: string) => {
     const ref = generateBookingRef();
     setBooking((prev) => ({ ...prev, bookingRef: ref, userEmail: email, bookingComplete: true }));
@@ -66,7 +92,11 @@ export function BookingProvider({ children }: { children: ReactNode }) {
 
   return (
     <BookingContext.Provider
-      value={{ booking, setSearchParams, selectPackage, applyCustomizations, setTravelers, setPaymentMethod, confirmBooking, resetBooking }}
+      value={{
+        booking, setSearchParams, selectPackage, applyCustomizations,
+        setTravelers, setPaymentMethod, confirmFlight, confirmHotel,
+        confirmBooking, resetBooking,
+      }}
     >
       {children}
     </BookingContext.Provider>
@@ -78,3 +108,4 @@ export function useBooking() {
   if (!ctx) throw new Error("useBooking must be used within BookingProvider");
   return ctx;
 }
+

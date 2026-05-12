@@ -13,19 +13,41 @@ import {
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
-const TIMELINE = [
-  { id: 1, done: true, label: "Booking confirmed", date: "Mar 1, 2026" },
-  { id: 2, done: true, label: "Visa application submitted", date: "Mar 2, 2026" },
-  { id: 3, done: false, label: "Visa approved", date: "Est. Mar 6, 2026" },
-  { id: 4, done: false, label: "Pre-departure checklist sent", date: "Feb 26, 2026" },
-  { id: 5, done: false, label: "Departure", date: "Mar 12, 2026" },
-];
+// Derive timeline dates from booking state (filled in at runtime)
+function buildTimeline(depDateStr: string) {
+  const dep = new Date(depDateStr + "T00:00:00");
+  const confirmed = new Date(dep); confirmed.setDate(dep.getDate() - 10);
+  const visaSubmit = new Date(dep); visaSubmit.setDate(dep.getDate() - 9);
+  const visaApprove = new Date(dep); visaApprove.setDate(dep.getDate() - 5);
+  const preDep = new Date(dep); preDep.setDate(dep.getDate() - 14);
+  const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return [
+    { id: 1, done: true, label: "Booking confirmed", date: fmt(confirmed) },
+    { id: 2, done: true, label: "Visa application submitted", date: fmt(visaSubmit) },
+    { id: 3, done: false, label: "Visa approved", date: `Est. ${fmt(visaApprove)}` },
+    { id: 4, done: false, label: "Pre-departure checklist sent", date: fmt(preDep) },
+    { id: 5, done: false, label: "Departure", date: fmt(dep) },
+  ];
+}
 
 export default function DashboardPage() {
   const { booking } = useBooking();
   const pkg = booking.selectedPackage;
   const params = booking.searchParams;
   const ref = booking.bookingRef ?? "KBP-2026-00142";
+
+  // Parse departure date from travelWindow (e.g. "Mar 12, 2026 – Mar 22, 2026")
+  const rawDep = params.travelWindow.split("–")[0].trim();
+  const depDate = (() => {
+    const parsed = new Date(rawDep);
+    return isNaN(parsed.getTime()) ? "2026-03-12" : parsed.toISOString().split("T")[0];
+  })();
+
+  const TIMELINE = buildTimeline(depDate);
+
+  const travelerNames = (booking.travelers?.length ?? 0) > 0
+    ? booking.travelers!.map(t => t.fullName).join(", ")
+    : `${params.adults} traveler${params.adults !== 1 ? "s" : ""}`;
 
   return (
     <>
@@ -43,7 +65,7 @@ export default function DashboardPage() {
             <span className="font-inter text-body-sm text-white/70">Ref: {ref}</span>
           </div>
           <p className="font-inter text-label-caps uppercase tracking-widest text-white/50 mb-3">Departure in</p>
-          <DepartureCountdown departureDate="2026-03-12T00:00:00" className="[&_span]:text-white [&_p]:text-white/50" />
+          <DepartureCountdown departureDate={`${depDate}T00:00:00`} className="[&_span]:text-white [&_p]:text-white/50" />
         </div>
       </div>
 

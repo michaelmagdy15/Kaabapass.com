@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -10,8 +10,43 @@
   <meta name="apple-mobile-web-app-title" content="KaabaPass"/>
   <link rel="manifest" href="site.webmanifest"/>
   <meta name="theme-color" content="#193C31"/>
-  <title>KaabaPass — Coming Soon</title>
-  <meta name="description" content="KaabaPass — Your all-in-one Umrah travel experience. One click. We handle everything. Launching soon."/>
+  <title>KaabaPass — Complete Umrah Packages from the USA | Coming Soon</title>
+  <meta name="description" content="KaabaPass is your all-in-one Umrah travel platform. Book flights, Mecca hotels, visa assistance, ground transport, and licensed guides — all in one click from the USA. Launching soon."/>
+  <meta name="keywords" content="Umrah packages USA, Umrah travel, book Umrah online, Mecca hotels, Umrah visa, Muslim travel agency USA, Hajj travel, all-inclusive Umrah, Umrah from America, KaabaPass"/>
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+  <meta name="author" content="KaabaPass"/>
+  <meta name="copyright" content="© 2026 KaabaPass"/>
+  <meta name="rating" content="general"/>
+  <meta name="revisit-after" content="7 days"/>
+  <meta name="language" content="en"/>
+  <meta name="geo.region" content="US"/>
+  <meta name="geo.placename" content="United States"/>
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://kaabapass.com/"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://kaabapass.com/"/>
+  <meta property="og:site_name" content="KaabaPass"/>
+  <meta property="og:title" content="KaabaPass — Complete Umrah Packages from the USA"/>
+  <meta property="og:description" content="One click. We handle everything — flights, Mecca hotels, visa assistance, guides, and transfers. Your complete Umrah journey from the USA, simplified."/>
+  <meta property="og:image" content="https://kaabapass.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="KaabaPass — Complete Umrah Packages from the USA"/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@KaabaPass"/>
+  <meta name="twitter:creator" content="@KaabaPass"/>
+  <meta name="twitter:title" content="KaabaPass — Complete Umrah Packages from the USA"/>
+  <meta name="twitter:description" content="One click. We handle everything — flights, Mecca hotels, visa assistance, guides, and transfers. Launching soon."/>
+  <meta name="twitter:image" content="https://kaabapass.com/og-image.png"/>
+  <meta name="twitter:image:alt" content="KaabaPass — Complete Umrah Packages from the USA"/>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=Tajawal:wght@400;500&display=swap" rel="stylesheet"/>
@@ -508,5 +543,72 @@
     setTimeout(()=>{btn.disabled=false;btn.textContent='Notify Me';document.getElementById('notify-form').reset();setTimeout(()=>{msg.textContent=''},500);},5000);
   }
 </script>
+
+<!-- Structured Data: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "KaabaPass",
+  "url": "https://kaabapass.com",
+  "logo": "https://kaabapass.com/favicon.svg",
+  "description": "KaabaPass is the all-in-one Umrah travel platform. Book flights, Mecca hotels, visa assistance, ground transport, and licensed guides in one click from the USA.",
+  "telephone": "",
+  "email": "info@kaabapass.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "US"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "serviceType": "Umrah Travel Packages",
+  "sameAs": []
+}
+</script>
+
+<!-- Structured Data: WebSite with SearchAction -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "KaabaPass",
+  "url": "https://kaabapass.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://app.kaabapass.com/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Structured Data: Service Offering -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Complete Umrah Packages from the USA",
+  "provider": {
+    "@type": "TravelAgency",
+    "name": "KaabaPass",
+    "url": "https://kaabapass.com"
+  },
+  "serviceType": "Umrah Travel Package",
+  "description": "All-inclusive Umrah travel packages including international flights, Mecca hotel accommodations, Umrah visa assistance, ground transportation, and licensed tour guides.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://app.kaabapass.com"
+  }
+}
+</script>
+
 </body>
 </html>

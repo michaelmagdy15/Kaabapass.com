@@ -2,10 +2,29 @@ import type { Metadata } from "next";
 import { TrustBadge } from "@/components/shared/TrustBadge";
 import { ShieldCheck, Globe, Heart, Users } from "lucide-react";
 
+const BASE_URL = "https://app.kaabapass.com";
+
 export const metadata: Metadata = {
-  title: "About KaabaPass — Our Mission",
-  description: "KaabaPass is a US-based licensed Umrah travel agency dedicated to providing stress-free spiritual journeys for Muslims in America.",
+  title: "About KaabaPass — Our Mission & Story",
+  description:
+    "KaabaPass is a US-based licensed Umrah travel agency dedicated to making spiritual journeys accessible to every Muslim in America. Learn about our mission, values, and team.",
+  alternates: { canonical: `${BASE_URL}/about` },
+  openGraph: {
+    title: "About KaabaPass — Our Mission & Story",
+    description:
+      "KaabaPass is a US-based licensed Umrah travel agency dedicated to making spiritual journeys accessible to every Muslim in America.",
+    url: `${BASE_URL}/about`,
+    type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "About KaabaPass" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About KaabaPass — Our Mission & Story",
+    description: "KaabaPass is a US-based Umrah travel agency making spiritual journeys accessible to every Muslim in America.",
+    images: ["/og-image.png"],
+  },
 };
+
 
 const VALUES = [
   { icon: ShieldCheck, title: "Integrity", body: "We are transparent about pricing, timelines, and limitations. No hidden fees, no overpromises." },

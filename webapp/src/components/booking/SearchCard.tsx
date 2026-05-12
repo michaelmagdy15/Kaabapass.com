@@ -6,6 +6,15 @@ import { MapPin, Users, Calendar, Clock, ChevronDown, ChevronUp, Minus, Plus } f
 import { cn } from "@/lib/utils";
 import { useBooking } from "@/hooks/useBooking";
 
+const TODAY = new Date().toISOString().split("T")[0];
+const DEFAULT_DEP = "2026-03-12";
+const DEFAULT_RET = "2026-03-22";
+
+function formatDateLabel(iso: string): string {
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
 const US_CITIES = [
   { city: "New York", code: "JFK" },
   { city: "New York", code: "EWR" },
@@ -32,19 +41,26 @@ export function SearchCard({ inline = false }: { inline?: boolean }) {
   const [travelersOpen, setTravelersOpen] = useState(false);
   const [tripLength, setTripLength] = useState<7 | 10 | 14 | "custom">(10);
   const [flexible, setFlexible] = useState(false);
+  const [depDate, setDepDate] = useState(DEFAULT_DEP);
+  const [retDate, setRetDate] = useState(DEFAULT_RET);
 
   const selectedCity = US_CITIES.find((c) => c.code === departure);
   const totalTravelers = adults + children + infants;
 
   const handleSearch = () => {
+    const travelWindow = flexible
+      ? "Flexible — next 3 months"
+      : `${formatDateLabel(depDate)} – ${formatDateLabel(retDate)}`;
+    const nights = flexible ? 10
+      : Math.max(1, Math.round((new Date(retDate).getTime() - new Date(depDate).getTime()) / 86400000));
     setSearchParams({
       departureCity: selectedCity ? `${selectedCity.city} (${selectedCity.code})` : departure,
       departureCode: departure,
       adults,
       children,
       infants,
-      travelWindow: flexible ? "Flexible — next 3 months" : "Mar 12 – Mar 22, 2026",
-      tripLength: tripLength === "custom" ? 10 : tripLength,
+      travelWindow,
+      tripLength: tripLength === "custom" ? nights : tripLength,
     });
     router.push("/search");
   };
@@ -135,27 +151,47 @@ export function SearchCard({ inline = false }: { inline?: boolean }) {
           )}
         </div>
 
-        {/* Travel Window */}
+        {/* Travel Dates */}
         <div className="flex flex-col gap-1">
           <label className="font-inter text-label font-medium text-muted flex items-center gap-1.5">
             <Calendar size={13} />
             Travel Dates
           </label>
-          <div className="h-[52px] border border-border rounded-sm bg-surface flex items-center px-3">
-            <div className="flex-1">
-              {flexible ? (
-                <span className="font-inter text-body-sm text-on-surface">Flexible — next 3 months</span>
-              ) : (
-                <span className="font-inter text-body-md text-on-surface">Mar 12 – Mar 22, 2026</span>
-              )}
+          {flexible ? (
+            <div className="h-[52px] border border-border rounded-sm bg-surface flex items-center px-3">
+              <span className="font-inter text-body-sm text-on-surface flex-1">Flexible — next 3 months</span>
+              <button onClick={() => setFlexible(false)} className="text-[11px] font-inter font-medium text-primary hover:underline ml-2">Pick dates</button>
             </div>
-            <button
-              onClick={() => setFlexible(!flexible)}
-              className="text-[11px] font-inter font-medium text-primary hover:underline ml-2"
-            >
-              {flexible ? "Pick dates" : "Flexible"}
-            </button>
-          </div>
+          ) : (
+            <div className="flex gap-1.5">
+              <div className="flex flex-col flex-1">
+                <span className="font-inter text-[10px] text-muted mb-0.5">Departure</span>
+                <input
+                  type="date"
+                  value={depDate}
+                  min={TODAY}
+                  onChange={e => {
+                    setDepDate(e.target.value);
+                    if (retDate <= e.target.value) setRetDate(e.target.value);
+                  }}
+                  className="h-[38px] px-2 border border-border rounded-sm bg-surface font-inter text-body-sm text-on-surface focus:outline-none focus:border-primary"
+                  aria-label="Departure date"
+                />
+              </div>
+              <div className="flex flex-col flex-1">
+                <span className="font-inter text-[10px] text-muted mb-0.5">Return</span>
+                <input
+                  type="date"
+                  value={retDate}
+                  min={depDate}
+                  onChange={e => setRetDate(e.target.value)}
+                  className="h-[38px] px-2 border border-border rounded-sm bg-surface font-inter text-body-sm text-on-surface focus:outline-none focus:border-primary"
+                  aria-label="Return date"
+                />
+              </div>
+              <button onClick={() => setFlexible(true)} className="self-end mb-1 text-[11px] font-inter font-medium text-primary hover:underline whitespace-nowrap">Flexible</button>
+            </div>
+          )}
         </div>
 
         {/* Trip Length */}
