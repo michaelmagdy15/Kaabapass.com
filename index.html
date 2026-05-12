@@ -32,10 +32,35 @@
       --border:#E8E2D4;
       --border-strong:#C9BFA8;
       --success:#2D7A4F;
+      --kaaba-front:#111111;
+      --kaaba-top:#2A2A2A;
+      --kaaba-door-accent:#7A5820;
+    }
+
+    :root[data-theme="dark"] {
+      --primary:#478A75;
+      --primary-hover:#5BA38E;
+      --tertiary:#D4A968;
+      --tertiary-container:#B08848;
+      --neutral:#0A110F;
+      --surface:#121C19;
+      --surface-elevated:#1A2723;
+      --on-surface:#F0F4F2;
+      --secondary:#B0BFBA;
+      --muted:#80938D;
+      --border:#233630;
+      --border-strong:#324C44;
+      --success:#3FAE70;
+      --kaaba-front:#050807;
+      --kaaba-top:#111916;
+      --kaaba-door-accent:#614619;
     }
 
     html{scroll-behavior:smooth}
-    body{font-family:'Inter',sans-serif;background:var(--neutral);color:var(--on-surface);min-height:100vh;-webkit-font-smoothing:antialiased}
+    body{font-family:'Inter',sans-serif;background:var(--neutral);color:var(--on-surface);min-height:100vh;-webkit-font-smoothing:antialiased;transition:background-color 0.3s, color 0.3s;}
+    nav, .cd-block, .notify-form input, .trust-card, footer, .girih-bg, .badge-trust-nav, .trust-pill, .badge-included {
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
 
     /* Prayer strip */
     .prayer-strip{
@@ -92,6 +117,9 @@
       position:fixed;inset:0;z-index:-1;
       background-color:var(--neutral);
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' fill='none' stroke='%23193C31' stroke-width='0.6' opacity='0.08'/%3E%3Cpath d='M40 20 L60 40 L40 60 L20 40 Z' fill='none' stroke='%23193C31' stroke-width='0.6' opacity='0.05'/%3E%3C/svg%3E");
+    }
+    :root[data-theme="dark"] .girih-bg {
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' fill='none' stroke='%23478A75' stroke-width='0.6' opacity='0.15'/%3E%3Cpath d='M40 20 L60 40 L40 60 L20 40 Z' fill='none' stroke='%23478A75' stroke-width='0.6' opacity='0.08'/%3E%3C/svg%3E");
     }
 
     .arabic-accent{
@@ -197,6 +225,19 @@
       border:1px solid var(--border);
     }
 
+    /* Theme toggle */
+    .theme-toggle{
+      background:none;border:none;color:var(--primary);cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      width:36px;height:36px;border-radius:50%;
+      transition:background .2s,color .2s;
+    }
+    .theme-toggle:hover{background:var(--border);}
+    .theme-toggle svg{width:20px;height:20px;}
+    .theme-toggle .moon{display:none;}
+    :root[data-theme="dark"] .theme-toggle .sun{display:none;}
+    :root[data-theme="dark"] .theme-toggle .moon{display:block;}
+
     /* Footer */
     footer{
       text-align:center;padding:32px 24px;border-top:1px solid var(--border);
@@ -293,40 +334,46 @@
         <!-- KaabaPass emblem: circle arcs + plane + Kaaba + minarets -->
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Green arc: 8-o'clock → 1-o'clock (large, left+top side) -->
-          <path d="M20,83 A46,46 0 1,0 83,20" stroke="#193C31" stroke-width="5.5" stroke-linecap="round"/>
+          <path d="M20,83 A46,46 0 1,0 83,20" stroke="var(--primary)" stroke-width="5.5" stroke-linecap="round"/>
           <!-- Gold arc: 1-o'clock → 5-o'clock (right side) -->
-          <path d="M83,20 A46,46 0 0,1 83,100" stroke="#B08848" stroke-width="5" stroke-linecap="round"/>
+          <path d="M83,20 A46,46 0 0,1 83,100" stroke="var(--tertiary)" stroke-width="5" stroke-linecap="round"/>
           <!-- Plane at 1-o'clock, pointing upper-right -->
           <g transform="translate(88,13) rotate(42)">
-            <ellipse cx="0" cy="0" rx="2" ry="7" fill="#193C31"/>
-            <path d="M-2,0 L-9,4 L-9,6 L-2,3Z" fill="#193C31"/>
-            <path d="M2,0 L9,4 L9,6 L2,3Z" fill="#193C31"/>
-            <path d="M-1.5,-4 L-4,-8 L-4,-6 L-1.5,-3.5Z" fill="#193C31"/>
-            <path d="M1.5,-4 L4,-8 L4,-6 L1.5,-3.5Z" fill="#193C31"/>
+            <ellipse cx="0" cy="0" rx="2" ry="7" fill="var(--primary)"/>
+            <path d="M-2,0 L-9,4 L-9,6 L-2,3Z" fill="var(--primary)"/>
+            <path d="M2,0 L9,4 L9,6 L2,3Z" fill="var(--primary)"/>
+            <path d="M-1.5,-4 L-4,-8 L-4,-6 L-1.5,-3.5Z" fill="var(--primary)"/>
+            <path d="M1.5,-4 L4,-8 L4,-6 L1.5,-3.5Z" fill="var(--primary)"/>
           </g>
           <!-- Left minaret -->
-          <rect x="29" y="54" width="5" height="22" rx="1" fill="#B08848"/>
-          <polygon points="31.5,47 27,54 36,54" fill="#B08848"/>
+          <rect x="29" y="54" width="5" height="22" rx="1" fill="var(--tertiary)"/>
+          <polygon points="31.5,47 27,54 36,54" fill="var(--tertiary)"/>
           <!-- Right minaret -->
-          <rect x="86" y="54" width="5" height="22" rx="1" fill="#B08848"/>
-          <polygon points="88.5,47 84,54 93,54" fill="#B08848"/>
+          <rect x="86" y="54" width="5" height="22" rx="1" fill="var(--tertiary)"/>
+          <polygon points="88.5,47 84,54 93,54" fill="var(--tertiary)"/>
           <!-- Kaaba front face (dark) -->
-          <rect x="42" y="50" width="36" height="38" fill="#111"/>
+          <rect x="42" y="50" width="36" height="38" fill="var(--kaaba-front)"/>
           <!-- Kaaba top perspective face -->
-          <polygon points="42,50 60,43 78,50" fill="#2A2A2A"/>
+          <polygon points="42,50 60,43 78,50" fill="var(--kaaba-top)"/>
           <!-- Kiswah gold band -->
-          <rect x="42" y="63" width="36" height="6" fill="#B08848"/>
+          <rect x="42" y="63" width="36" height="6" fill="var(--tertiary)"/>
           <!-- Door -->
-          <rect x="53" y="70" width="14" height="18" rx="2" fill="#B08848" opacity="0.85"/>
-          <path d="M53,75 Q60,67 67,75" fill="#B08848" opacity="0.85"/>
-          <rect x="55" y="75" width="10" height="13" rx="1" fill="#7A5820"/>
+          <rect x="53" y="70" width="14" height="18" rx="2" fill="var(--tertiary)" opacity="0.85"/>
+          <path d="M53,75 Q60,67 67,75" fill="var(--tertiary)" opacity="0.85"/>
+          <rect x="55" y="75" width="10" height="13" rx="1" fill="var(--kaaba-door-accent)"/>
         </svg>
       </div>
       <span class="logo-word">kaaba<span>pass</span></span>
     </a>
-    <div class="badge-trust-nav">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <span>Saudi Embassy Partnership</span>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="badge-trust-nav">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Saudi Embassy Partnership</span>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -422,6 +469,21 @@
 </footer>
 
 <script>
+  // Theme initialization
+  const root = document.documentElement;
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    root.setAttribute('data-theme', 'dark');
+  }
+
+  // Theme toggle listener
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    const currentTheme = root.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+
   // Countdown — set your launch date here
   const LAUNCH = new Date('2026-06-12T00:00:00');
   function pad(n){return String(n).padStart(2,'0')}

@@ -1,0 +1,85 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#193C31",
+        "primary-container": "#2A5C4D",
+        "on-primary": "#FFFFFF",
+        tertiary: "#B08848",
+        "tertiary-container": "#D4A968",
+        gold: "#B08848",
+        "gold-light": "#D4A968",
+        "on-tertiary": "#1A1A1A",
+        neutral: "#FAF7F0",
+        surface: "#FFFFFF",
+        "surface-elevated": "#F5EFE0",
+        "on-neutral": "#1A1A1A",
+        "on-surface": "#1A1A1A",
+        secondary: "#3A3F47",
+        muted: "#6C7278",
+        border: "#E8E2D4",
+        "border-strong": "#C9BFA8",
+        success: "#2D7A4F",
+        warning: "#B8862E",
+        error: "#A6362F",
+        info: "#2A5C7A",
+      },
+      fontFamily: {
+        fraunces: ["var(--font-fraunces)", "Georgia", "serif"],
+        inter: ["var(--font-inter)", "system-ui", "sans-serif"],
+        tajawal: ["var(--font-tajawal)", "Arial", "sans-serif"],
+      },
+      fontSize: {
+        "display": ["3.5rem", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
+        "display-lg": ["3.5rem", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
+        "display-md": ["2.75rem", { lineHeight: "1.1", letterSpacing: "-0.015em" }],
+        "h1": ["2.25rem", { lineHeight: "1.15", letterSpacing: "-0.01em" }],
+        "h2": ["1.75rem", { lineHeight: "1.25" }],
+        "h3": ["1.375rem", { lineHeight: "1.35" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.55" }],
+        "body-md": ["1rem", { lineHeight: "1.6" }],
+        "body-sm": ["0.875rem", { lineHeight: "1.55" }],
+        "label": ["0.875rem", { lineHeight: "1.4" }],
+        "label-caps": ["0.75rem", { lineHeight: "1.3", letterSpacing: "0.08em" }],
+        "price-display": ["2rem", { lineHeight: "1", letterSpacing: "-0.01em" }],
+      },
+      borderRadius: {
+        xs: "4px",
+        sm: "8px",
+        md: "12px",
+        lg: "16px",
+        xl: "24px",
+        full: "9999px",
+      },
+      spacing: {
+        xs: "4px",
+        sm: "8px",
+        md: "16px",
+        lg: "24px",
+        xl: "32px",
+        "2xl": "48px",
+        "3xl": "64px",
+        "4xl": "96px",
+      },
+      boxShadow: {
+        card: "0 4px 16px rgba(15, 76, 58, 0.06)",
+        modal: "0 8px 32px rgba(15, 76, 58, 0.12)",
+      },
+      maxWidth: {
+        content: "1200px",
+        hero: "1400px",
+        form: "720px",
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;
